@@ -10,6 +10,7 @@ function emptyFields(string $name, string $email, string $password): bool
     return false;
 }
 
+
 function validEmail(string $email): bool
 {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -33,4 +34,15 @@ function isEmailAlreadyTaken(PDO $pdo, string $email)
         return true;
     }
     return false;
+}
+function userRegister(PDO $pdo, string $name, string $email, string $password)
+{
+    $user = createUser($pdo, $name, $email, $password);
+    $_SESSION['userdata'] = $user;
+}
+function removePreviousInputDataFromSession()
+{
+    if (isset($_SESSION["signup_errors"])) {
+        unset($_SESSION["signup_errors"]);
+    }
 }

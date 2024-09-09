@@ -1,3 +1,7 @@
+<?php
+require_once "./includes/session_config.inc.php";
+require_once "./includes/signup_view.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,18 +15,21 @@
 <body>
     <div class="form-container">
         <h2>Registration Form</h2>
-        <form action="" method="">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+        <form action="includes/signup.inc.php" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required value="<?php echo isset($_SESSION['signup_data']['name']) ? htmlspecialchars($_SESSION['signup_data']['name'], ENT_QUOTES) : ''; ?>">
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required value="<?php echo isset($_SESSION['signup_data']['email']) ? htmlspecialchars($_SESSION['signup_data']['email'], ENT_QUOTES) : ''; ?>">
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" required>
 
             <input type="submit" value="Register">
         </form>
+
+        <!-- Display any signup errors here -->
+        <?php viewSignupErrors(); ?>
     </div>
 </body>
 
