@@ -1,6 +1,7 @@
 <?php
 require_once "./includes/session_config.inc.php";
 require_once "./includes/signup_view.inc.php";
+require_once "./includes/login_view.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,24 +14,47 @@ require_once "./includes/signup_view.inc.php";
 </head>
 
 <body>
-    <div class="form-container">
-        <h2>Registration Form</h2>
-        <form action="includes/signup.inc.php" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required value="<?php echo isset($_SESSION['signup_data']['name']) ? htmlspecialchars($_SESSION['signup_data']['name'], ENT_QUOTES) : ''; ?>">
+    <?php viewWelcomeMsg(); ?>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required value="<?php echo isset($_SESSION['signup_data']['email']) ? htmlspecialchars($_SESSION['signup_data']['email'], ENT_QUOTES) : ''; ?>">
+    <div class="big_div">
+        <?php if (isset($_SESSION['userdata'])): ?>
+            <form method="POST" action="includes/logout.inc.php">
+                <button type="submit" name="submitButton">Logout</button>
+            </form>
+        <?php endif; ?>
 
-            <label for="pwd">Password:</label>
-            <input type="password" id="pwd" name="pwd" required>
+        <div class="form-container">
+            <h2>Registration Form</h2>
+            <form action="includes/signup.inc.php" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required value="<?php echo isset($_SESSION['signup_data']['name']) ? htmlspecialchars($_SESSION['signup_data']['name'], ENT_QUOTES) : ''; ?>">
 
-            <input type="submit" value="Register">
-        </form>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required value="<?php echo isset($_SESSION['signup_data']['email']) ? htmlspecialchars($_SESSION['signup_data']['email'], ENT_QUOTES) : ''; ?>">
 
-        <!-- Display any signup errors here -->
-        <?php viewSignupErrors(); ?>
+                <label for="pwd">Password:</label>
+                <input type="password" id="pwd" name="pwd" required>
+
+                <input type="submit" value="Register">
+            </form>
+            <?php viewSignupErrors(); ?>
+        </div>
+
+        <div class="form-container">
+            <h2>Login Form</h2>
+            <form action="includes/login.inc.php" method="POST">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+
+                <label for="pwd">Password:</label>
+                <input type="password" id="pwd" name="pwd">
+
+                <input type="submit" value="Login">
+            </form>
+            <?php viewLoginErrors(); ?>
+        </div>
     </div>
 </body>
+
 
 </html>
