@@ -39,6 +39,7 @@ function userRegister(PDO $pdo, string $name, string $email, string $password)
 {
     $user = createUser($pdo, $name, $email, $password);
     $_SESSION['userdata'] = $user;
+    return $user;
 }
 function removePreviousInputDataFromSession()
 {

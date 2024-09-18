@@ -8,5 +8,5 @@ unset($_SESSION['userdata']);
 // session_destroy();
 
 // Redirect to a page (optional)
-header("Location: ../index.php");
+header("Location: ../login.php");
 exit();

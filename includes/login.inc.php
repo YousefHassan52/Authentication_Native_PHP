@@ -47,14 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if ($loginErrors) {
 
             $_SESSION["login_errors"] = $loginErrors;
-            header("Location: ../index.php");
+            header("Location: ../login.php");
         } else {
             // If no errors, register the user
             $loginResult = login($pdo, $email, $pwd);
             if ($loginResult) {
-                header("Location: ../index.php?login=success");
+                if ($loginResult['role'] == 'admin') {
+                    header(header: "Location: ../teacher_home.php");
+                } else {
+                    header(header: "Location: ../student_home.php");
+                }
             } else {
-                header("Location: ../index.php?login=false");
+                header(header: "Location: ../login.php?login=false");
             }
         }
     } catch (PDOException $e) {

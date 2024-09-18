@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #610303;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,13 +8,6 @@ body {
     margin: 0;
 }
 
-.form-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
 
 h2 {
     text-align: center;

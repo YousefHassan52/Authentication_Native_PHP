@@ -56,12 +56,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 'email' => $email,
             ];
             $_SESSION["signup_errors"] = $errors;
-            header("Location: ../index.php");
+            header("Location: ../signup.php");
         } else {
             // If no errors, register the user
             userRegister($pdo, $name, $email, $pwd);
             removePreviousInputDataFromSession();
-            header("Location: ../index.php?signup=success");
+            // if ($registered_user['role'] == 'admin') {
+            header("Location: ../student_home.php");
+            // } else {
+            //     header("Location: ../student_home.php?");
+            // }
         }
     } catch (PDOException $e) {
         // Catch any database errors and display a message
@@ -69,6 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 } else {
     // If not a POST request, redirect back to the index page
-    header("location: ../index.php");
+    header("location: ../signup.php");
     die();
 }
